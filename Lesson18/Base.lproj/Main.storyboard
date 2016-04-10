@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D5Z-WJ-FOB">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,83 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jtm-K9-zkS">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="bsl-rs-7Ri"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CK1-Th-eL9">
+                                <rect key="frame" x="528" y="478" width="56" height="30"/>
+                                <state key="normal" title="Zoom In"/>
+                                <connections>
+                                    <action selector="zoomInDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dBd-Jx-vo7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3J-Ck-CIz">
+                                <rect key="frame" x="515" y="516" width="69" height="30"/>
+                                <state key="normal" title="Zoom Out"/>
+                                <connections>
+                                    <action selector="zoomOutDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CTz-Iu-adr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKd-vy-PEs">
+                                <rect key="frame" x="506" y="554" width="78" height="30"/>
+                                <gestureRecognizers/>
+                                <state key="normal" title="Where I am"/>
+                                <connections>
+                                    <action selector="whereImDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i9H-Id-04k"/>
+                                    <outletCollection property="gestureRecognizers" destination="Ber-yD-Sdg" appends="YES" id="vHR-cO-I8i"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Jtm-K9-zkS" secondAttribute="bottom" id="25W-YD-kJP"/>
+                            <constraint firstItem="Jtm-K9-zkS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="AYt-Sw-oZb"/>
+                            <constraint firstItem="uKd-vy-PEs" firstAttribute="top" secondItem="D3J-Ck-CIz" secondAttribute="bottom" constant="8" id="B5n-RE-KY6"/>
+                            <constraint firstItem="CK1-Th-eL9" firstAttribute="trailing" secondItem="D3J-Ck-CIz" secondAttribute="trailing" id="GZB-zE-iV1"/>
+                            <constraint firstAttribute="trailing" secondItem="uKd-vy-PEs" secondAttribute="trailing" constant="16" id="Gbb-e2-ROu"/>
+                            <constraint firstItem="Jtm-K9-zkS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LCk-aP-2Ka"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uKd-vy-PEs" secondAttribute="bottom" constant="16" id="LJ8-gw-8Ju"/>
+                            <constraint firstItem="D3J-Ck-CIz" firstAttribute="trailing" secondItem="uKd-vy-PEs" secondAttribute="trailing" id="Np4-3V-1K8"/>
+                            <constraint firstAttribute="trailing" secondItem="Jtm-K9-zkS" secondAttribute="trailing" id="aNc-Xu-bDB"/>
+                            <constraint firstAttribute="trailing" secondItem="D3J-Ck-CIz" secondAttribute="trailing" constant="16" id="ffh-xc-wMg"/>
+                            <constraint firstItem="D3J-Ck-CIz" firstAttribute="top" secondItem="CK1-Th-eL9" secondAttribute="bottom" constant="8" id="tdX-ET-8b8"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Map" id="FWi-XM-YJC"/>
+                    <connections>
+                        <outlet property="mapView" destination="Jtm-K9-zkS" id="TNA-7t-KO9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Ber-yD-Sdg">
+                    <connections>
+                        <action selector="longPressDidFire:" destination="BYZ-38-t0r" id="A6q-mF-oB6"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="1117" y="332"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9kw-ll-w1w">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D5Z-WJ-FOB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O9W-I3-sxS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="G5g-cT-P4j"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="boc-EG-Lgg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="218" y="984"/>
         </scene>
     </scenes>
 </document>
