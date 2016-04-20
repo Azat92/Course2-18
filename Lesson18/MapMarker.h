@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @import MapKit;
+#import "Building.h"
 
 @interface MapMarker : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
@@ -16,5 +17,7 @@
 
 + (instancetype)markerWithTitle:(NSString *)title subtitle:(NSString *)subtitle andCoordinate:(CLLocationCoordinate2D)coordinate;
 + (instancetype)universityMapMarker;
+
++(NSMutableArray* )getAllUniversityMapMarkers;
 
 @end
