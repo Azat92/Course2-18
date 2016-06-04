@@ -22,4 +22,12 @@
     return [MapMarker markerWithTitle:@"Kazan Federal University" subtitle:@"18, Kremlyovskaya st." andCoordinate:CLLocationCoordinate2DMake(55.7904552, 49.1218355)];
 }
 
++(NSMutableArray *)getAllUniversityMapMarkers{
+    NSMutableArray *mapArr = [NSMutableArray new];
+    NSMutableArray *buildArr = [Building universityBuilding];
+    for(Building *build in buildArr)
+        [mapArr addObject:[MapMarker markerWithTitle:build.name subtitle:build.address andCoordinate:build.location]];
+    
+    return mapArr;
+}
 @end

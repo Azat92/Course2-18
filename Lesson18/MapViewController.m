@@ -8,12 +8,14 @@
 
 #import "MapViewController.h"
 #import "MapMarker.h"
+#import "MapDetailViewController.h"
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, readonly) MapMarker *universityMarker;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (nonatomic, readonly) CLGeocoder *geocoder;
+@property (nonatomic) NSMutableArray<MapMarker *> *markers;
 @end
 
 @implementation MapViewController
@@ -26,6 +28,8 @@
         _universityMarker = [MapMarker universityMapMarker];
     return _universityMarker;
 }
+
+
 
 - (CLLocationManager *)locationManager {
     if (!_locationManager) {
@@ -49,6 +53,10 @@
     [self.locationManager startUpdatingLocation];
     self.mapView.showsScale = YES;
     self.mapView.showsUserLocation = YES;
+    _markers = [MapMarker getAllUniversityMapMarkers];
+    for(MapMarker *marker in _markers){
+        [self.mapView addAnnotation:marker];
+    }
     [self.mapView addAnnotation:self.universityMarker];
 }
 
@@ -110,7 +118,7 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    if (annotation == self.universityMarker) {
+    
         static NSString *pinID = @"MapPinIdentifier";
         MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pinID];
         if (!pin) {
@@ -120,23 +128,29 @@
             pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
         return pin;
-    }
-    else
-        return nil;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    if (view.annotation == self.universityMarker) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.universityMarker.title message:self.universityMarker.subtitle preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Navigate" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:view.annotation.coordinate addressDictionary:nil];
-            MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-            mapItem.name = view.annotation.title;
-            [mapItem openInMapsWithLaunchOptions:@{ MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving }];
+    for(MapMarker *marker in _markers){
+        if(marker == view.annotation){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:marker.title message:marker.subtitle preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"More" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:view.annotation.coordinate addressDictionary:nil];
+//            MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+//            mapItem.name = view.annotation.title;
+//            [mapItem openInMapsWithLaunchOptions:@{ MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving }];
+
+            UINavigationController *nmvc = [self.storyboard instantiateViewControllerWithIdentifier:@"nmdvc"];
+            MapDetailViewController *mdvc = nmvc.viewControllers.firstObject;
+            mdvc.build = [Building getBuildWithName:marker.title];
+            [self presentViewController:nmvc animated:YES completion:nil];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
+        }
+        
     }
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
