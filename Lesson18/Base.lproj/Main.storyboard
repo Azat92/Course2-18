@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D5Z-WJ-FOB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uBb-4e-Q8N">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Map-->
@@ -65,6 +66,7 @@
                     <navigationItem key="navigationItem" title="Map" id="FWi-XM-YJC"/>
                     <connections>
                         <outlet property="mapView" destination="Jtm-K9-zkS" id="TNA-7t-KO9"/>
+                        <segue destination="SeN-q1-NJ4" kind="show" id="iJ9-sq-V1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -76,10 +78,98 @@
             </objects>
             <point key="canvasLocation" x="1117" y="332"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Detail Map Marker View Controller-->
+        <scene sceneID="fEj-8l-XNO">
+            <objects>
+                <viewController storyboardIdentifier="detail" id="SeN-q1-NJ4" customClass="DetailMapMarkerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bpV-E1-QXk"/>
+                        <viewControllerLayoutGuide type="bottom" id="GrA-uL-fGo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bzY-2C-xtI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugF-qg-R3D">
+                                <rect key="frame" x="20" y="72" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Местоположение" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQd-8n-ccH">
+                                <rect key="frame" x="20" y="123" width="141" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9l3-Fv-3OO">
+                                <rect key="frame" x="114" y="72" width="466" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zec-Sd-jfD">
+                                <rect key="frame" x="169" y="123" width="411" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNA-KA-AG0">
+                                <rect key="frame" x="467" y="550" width="113" height="30"/>
+                                <state key="normal" title="Найти маршрут"/>
+                                <connections>
+                                    <action selector="navigate:" destination="SeN-q1-NJ4" eventType="touchUpInside" id="6M5-mK-6bE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9l3-Fv-3OO" firstAttribute="leading" secondItem="ugF-qg-R3D" secondAttribute="trailing" constant="16" id="F74-Fp-Got"/>
+                            <constraint firstItem="9l3-Fv-3OO" firstAttribute="trailing" secondItem="bzY-2C-xtI" secondAttribute="trailingMargin" id="G3g-jE-ul7"/>
+                            <constraint firstItem="yNA-KA-AG0" firstAttribute="trailing" secondItem="bzY-2C-xtI" secondAttribute="trailingMargin" id="T1w-tL-WfO"/>
+                            <constraint firstItem="Zec-Sd-jfD" firstAttribute="top" secondItem="9l3-Fv-3OO" secondAttribute="bottom" constant="30" id="YSe-ls-25A"/>
+                            <constraint firstItem="Zec-Sd-jfD" firstAttribute="trailing" secondItem="bzY-2C-xtI" secondAttribute="trailingMargin" id="YpQ-JB-Koz"/>
+                            <constraint firstItem="ugF-qg-R3D" firstAttribute="leading" secondItem="bzY-2C-xtI" secondAttribute="leadingMargin" id="bG3-DX-5tE"/>
+                            <constraint firstItem="Zec-Sd-jfD" firstAttribute="leading" secondItem="gQd-8n-ccH" secondAttribute="trailing" constant="8" id="hAT-Vt-o53"/>
+                            <constraint firstItem="9l3-Fv-3OO" firstAttribute="top" secondItem="bpV-E1-QXk" secondAttribute="bottom" constant="8" id="hGc-V3-cth"/>
+                            <constraint firstItem="GrA-uL-fGo" firstAttribute="top" secondItem="yNA-KA-AG0" secondAttribute="bottom" constant="20" id="qvC-Or-Ihe"/>
+                            <constraint firstItem="gQd-8n-ccH" firstAttribute="leading" secondItem="bzY-2C-xtI" secondAttribute="leadingMargin" id="tB7-vh-RYB"/>
+                            <constraint firstItem="gQd-8n-ccH" firstAttribute="top" secondItem="9l3-Fv-3OO" secondAttribute="bottom" constant="30" id="xVB-G6-Smc"/>
+                            <constraint firstItem="ugF-qg-R3D" firstAttribute="top" secondItem="bpV-E1-QXk" secondAttribute="bottom" constant="8" id="ydd-kb-Shh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="9l3-Fv-3OO" id="7QF-bi-GFx"/>
+                        <outlet property="positionLabel" destination="Zec-Sd-jfD" id="lcK-2N-Ky8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bU4-d3-4bt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1842" y="332"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ghp-01-U8x">
+            <objects>
+                <tabBarController id="uBb-4e-Q8N" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="0FP-tU-17w">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="D5Z-WJ-FOB" kind="relationship" relationship="viewControllers" id="idG-T9-tOI"/>
+                        <segue destination="uMe-OQ-nXE" kind="relationship" relationship="viewControllers" id="RyI-M1-42K"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bWr-UX-pdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-582" y="1477"/>
+        </scene>
+        <!--Карта-->
         <scene sceneID="9kw-ll-w1w">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D5Z-WJ-FOB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Карта" id="3KC-He-VhG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="O9W-I3-sxS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -94,5 +184,66 @@
             </objects>
             <point key="canvasLocation" x="218" y="984"/>
         </scene>
+        <!--Университеты-->
+        <scene sceneID="fwC-hX-m58">
+            <objects>
+                <tableViewController id="zC7-Bn-pIE" customClass="MapMarkersTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="RxY-gR-Pwd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="YCJ-9u-rbH" style="IBUITableViewCellStyleDefault" id="cjH-jN-xt1">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjH-jN-xt1" id="6P5-5F-sW3">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YCJ-9u-rbH">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="SeN-q1-NJ4" kind="show" id="fwb-La-PP5"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zC7-Bn-pIE" id="OUB-rV-9X7"/>
+                            <outlet property="delegate" destination="zC7-Bn-pIE" id="f3j-da-CFh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Университеты" id="qiS-QN-2bF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xtm-t6-xms" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1064" y="1913"/>
+        </scene>
+        <!--Университет-->
+        <scene sceneID="ckW-rk-UGc">
+            <objects>
+                <navigationController id="uMe-OQ-nXE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Университет" id="FdU-gj-dxa"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="54p-68-Zmo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zC7-Bn-pIE" kind="relationship" relationship="rootViewController" id="Suz-iu-Sft"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JN4-ez-FdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="244" y="1913"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fwb-La-PP5"/>
+    </inferredMetricsTieBreakers>
 </document>

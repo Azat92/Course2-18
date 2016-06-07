@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23DE820A1D0704D20057AD5C /* DetailMapMarkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DE82091D0704D20057AD5C /* DetailMapMarkerViewController.m */; };
+		23DE820D1D070F4C0057AD5C /* MapMarkersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DE820C1D070F4C0057AD5C /* MapMarkersTableViewController.m */; };
 		AA9CF96B1CB9A47E008FE45A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF96A1CB9A47E008FE45A /* main.m */; };
 		AA9CF96E1CB9A47E008FE45A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF96D1CB9A47E008FE45A /* AppDelegate.m */; };
 		AA9CF9711CB9A47E008FE45A /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF9701CB9A47E008FE45A /* MapViewController.m */; };
@@ -18,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23DE82081D0704D20057AD5C /* DetailMapMarkerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMapMarkerViewController.h; sourceTree = "<group>"; };
+		23DE82091D0704D20057AD5C /* DetailMapMarkerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMapMarkerViewController.m; sourceTree = "<group>"; };
+		23DE820B1D070F4C0057AD5C /* MapMarkersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMarkersTableViewController.h; sourceTree = "<group>"; };
+		23DE820C1D070F4C0057AD5C /* MapMarkersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMarkersTableViewController.m; sourceTree = "<group>"; };
 		AA9CF9661CB9A47E008FE45A /* Lesson18.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lesson18.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9CF96A1CB9A47E008FE45A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AA9CF96C1CB9A47E008FE45A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,6 +81,10 @@
 				AA9CF9691CB9A47E008FE45A /* Supporting Files */,
 				AA9CF9821CB9A9A4008FE45A /* MapMarker.h */,
 				AA9CF9831CB9A9A4008FE45A /* MapMarker.m */,
+				23DE82081D0704D20057AD5C /* DetailMapMarkerViewController.h */,
+				23DE82091D0704D20057AD5C /* DetailMapMarkerViewController.m */,
+				23DE820B1D070F4C0057AD5C /* MapMarkersTableViewController.h */,
+				23DE820C1D070F4C0057AD5C /* MapMarkersTableViewController.m */,
 			);
 			path = Lesson18;
 			sourceTree = "<group>";
@@ -158,9 +168,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23DE820A1D0704D20057AD5C /* DetailMapMarkerViewController.m in Sources */,
 				AA9CF9711CB9A47E008FE45A /* MapViewController.m in Sources */,
 				AA9CF96E1CB9A47E008FE45A /* AppDelegate.m in Sources */,
 				AA9CF9841CB9A9A4008FE45A /* MapMarker.m in Sources */,
+				23DE820D1D070F4C0057AD5C /* MapMarkersTableViewController.m in Sources */,
 				AA9CF96B1CB9A47E008FE45A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
