@@ -8,24 +8,19 @@
 
 #import "MapViewController.h"
 #import "MapMarker.h"
+#import "DetailMapMarkerViewController.h"
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (nonatomic, readonly) MapMarker *universityMarker;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (nonatomic, readonly) CLGeocoder *geocoder;
+
+@property NSArray *universityMarkers;
 @end
 
 @implementation MapViewController
-@synthesize universityMarker = _universityMarker;
 @synthesize locationManager = _locationManager;
 @synthesize geocoder = _geocoder;
-
-- (MapMarker *)universityMarker {
-    if (!_universityMarker)
-        _universityMarker = [MapMarker universityMapMarker];
-    return _universityMarker;
-}
 
 - (CLLocationManager *)locationManager {
     if (!_locationManager) {
@@ -49,7 +44,10 @@
     [self.locationManager startUpdatingLocation];
     self.mapView.showsScale = YES;
     self.mapView.showsUserLocation = YES;
-    [self.mapView addAnnotation:self.universityMarker];
+    self.universityMarkers = [MapMarker kpfuUniversityMapMarkers];
+    for (MapMarker *mapMarker in self.universityMarkers) {
+        [self.mapView addAnnotation:mapMarker];
+    }
 }
 
 - (IBAction)longPressDidFire:(UIGestureRecognizer *)sender {
@@ -110,37 +108,37 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    if (annotation == self.universityMarker) {
-        static NSString *pinID = @"MapPinIdentifier";
-        MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pinID];
-        if (!pin) {
-            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pinID];
-            pin.pinTintColor = MKPinAnnotationView.greenPinColor;
-            pin.canShowCallout = YES;
-            pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    static NSString *pinID = @"MapPinIdentifier";
+    MKPinAnnotationView *pin;
+    for (MapMarker *mapMarker in self.universityMarkers) {
+        if (annotation == mapMarker) {
+            pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pinID];
+            if (!pin) {
+                pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pinID];
+                pin.pinTintColor = MKPinAnnotationView.greenPinColor;
+                pin.canShowCallout = YES;
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+                pin.rightCalloutAccessoryView = button;
+            }
         }
-        return pin;
     }
-    else
-        return nil;
+    return pin;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    if (view.annotation == self.universityMarker) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.universityMarker.title message:self.universityMarker.subtitle preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Navigate" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:view.annotation.coordinate addressDictionary:nil];
-            MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-            mapItem.name = view.annotation.title;
-            [mapItem openInMapsWithLaunchOptions:@{ MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving }];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+    for (MapMarker *mapMarker in self.universityMarkers) {
+        if (view.annotation == mapMarker) {
+            UIStoryboard *mystoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            DetailMapMarkerViewController *vc = [mystoryboard instantiateViewControllerWithIdentifier:@"detail"];
+            vc.mapMarker = mapMarker;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     NSLog(@"%@", locations);
+    
 }
 
 @end

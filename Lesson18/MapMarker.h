@@ -15,6 +15,5 @@
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 
 + (instancetype)markerWithTitle:(NSString *)title subtitle:(NSString *)subtitle andCoordinate:(CLLocationCoordinate2D)coordinate;
-+ (instancetype)universityMapMarker;
-
++ (NSMutableArray<MapMarker *> *)kpfuUniversityMapMarkers;
 @end
